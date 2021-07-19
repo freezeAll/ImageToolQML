@@ -995,6 +995,36 @@ void ImageToolQML::clearPaintData()
     update();
 }
 
+  void ImageToolQML::setDisplayImage(QVariant img)
+  {
+      displayImage(img);
+      emit displayImageChanged();
+  }
+/*
+  QVariant ImageToolQML::getDisplayImage()
+  {
+      QVariant var;
+      auto image = privatePtr->imgSource.toImage();
+      cv::Mat mat;
+      switch (image.format())
+      {
+          case QImage::Format_ARGB32:
+          case QImage::Format_RGB32:
+          case QImage::Format_ARGB32_Premultiplied:
+              mat = cv::Mat(image.height(), image.width(), CV_8UC4, (void*)image.constBits(), image.bytesPerLine());
+              break;
+          case QImage::Format_RGB888:
+              mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
+              cv::cvtColor(mat, mat, cv::COLOR_RGB2BGR );
+              break;
+          case QImage::Format_Indexed8:
+              mat = cv::Mat(image.height(), image.width(), CV_8UC1, (void*)image.constBits(), image.bytesPerLine());
+              break;
+      }
+      var.setValue(mat);
+      return var;
+  }
+*/
 
   ImageToolShape::ImageToolShape(QObject* parent) :
         QObject(parent)

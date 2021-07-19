@@ -82,6 +82,12 @@ class IMAGETOOLQML_EXPORT ImageToolQML : public QQuickPaintedItem
 public :
     Q_INVOKABLE ImageToolQML(QQuickItem *parent = nullptr);
     Q_INVOKABLE ~ImageToolQML();
+
+    Q_PROPERTY(QVariant displayImage WRITE setDisplayImage READ getDisplayImage NOTIFY displayImageChanged)
+    Q_PROPERTY(QVariantList shapes WRITE setShapes READ getShapes NOTIFY shapesChanged)
+signals:
+    void displayImageChanged();
+    void shapesChanged();
 public slots:
     void displayImage(QVariant img,ImageToolPaintData* paintData = nullptr);
     void displayQImage(const QImage& img,ImageToolPaintData* paintData = nullptr);
@@ -95,6 +101,9 @@ public slots:
     QJSValue createPaintData();
     QVariantList findShapes(const QVariant& objectName);
     QJSValue createPaintObject(const QVariant& type);
+
+    void setDisplayImage(QVariant img);
+    QVariant getDisplayImage() const;
 protected:
     virtual void paint(QPainter* painter) override;
     virtual void wheelEvent(QWheelEvent* e) override;
